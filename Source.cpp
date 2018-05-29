@@ -13,7 +13,7 @@ int MAIN()
     enemy.scale = 2.0f;
 
     Float3 enemyPositions[width][height];
-    int enemyLift[width][height];
+    int enemyLife[width][height];
 
     Sprite bullet(L"bullet.png");
     bullet.scale = 2.0f;
@@ -43,7 +43,7 @@ int MAIN()
                 {
                     Float3 offset(-width / 2 * 35.0f, 160.0f, 0.0f);
                     enemyPositions[x][y] = Float3(x * 35.0f, y * 20.0f, 0.0f) + offset;
-                    enemyLift[x][y] = y + 1;
+                    enemyLife[x][y] = y + 1;
                 }
             }
 
@@ -56,7 +56,7 @@ int MAIN()
         {
             for (int y = 0; y < height; y++)
             {
-                if (enemyLift[x][y] <= 0)
+                if (enemyLife[x][y] <= 0)
                     continue;
 
                 initFlag = false;
@@ -70,19 +70,19 @@ int MAIN()
                     bullet.position.y < enemy.position.y + 16.0f)
                 {
                     bullet.position = Float3(0.0f, App::GetWindowSize().y / 2.0f, 0.0f);
-                    enemyLift[x][y]--;
+                    enemyLife[x][y]--;
                     hitSound.Play();
                 }
 
-                if (enemyLift[x][y] == 3)
+                if (enemyLife[x][y] == 3)
                 {
                     enemy.color = Float4(1.0f, 0.0f, 0.0f, 1.0f);
                 }
-                else if (enemyLift[x][y] == 2)
+                else if (enemyLife[x][y] == 2)
                 {
                     enemy.color = Float4(0.0f, 1.0f, 0.0f, 1.0f);
                 }
-                else if (enemyLift[x][y] == 1)
+                else if (enemyLife[x][y] == 1)
                 {
                     enemy.color = Float4(0.0f, 0.0f, 1.0f, 1.0f);
                 }
